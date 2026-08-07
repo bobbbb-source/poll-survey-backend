@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignalR Poll Test</title>
+</head>
+<body>
+    <h1>SignalR Poll Test</h1>
+
+    <label for="pollCode">Poll code:</label>
+    <input id="pollCode" placeholder="Enter a new poll code">
+
+    <button id="connectButton">Connect</button>
+
+    <pre id="output">Not connected.</pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+
+    <script>
+        const output = document.getElementById("output");
+        const connectButton = document.getElementById("connectButton");
+
+        let connection;
+
+        connectButton.addEventListener("click", async () => {
+            const pollCode = document
+                .getElementById("pollCode")
+                .value
+                .trim()
+                .toUpperCase();
+
+            if (!pollCode) {
+                output.textContent = "Please enter a poll code.";
+                return;
+            }
+
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl("/pollhub")
+                .withAutomaticReconnect()
+                .build();
+
+            connection.on("ReceiveResults", data => {
+                output.textContent =
+                    "LIVE RESULTS RECEIVED:\n\n" +
+                    JSON.stringify(data, null, 2);
+            });
+
+            try {
+                await connection.start();
+                await connection.invoke("JoinPoll", pollCode);
+
+                output.textContent =
+                    "Connected successfully.\n" +
+                    "Joined poll: " + pollCode + "\n\n" +
+                    "Now submit a vote using the .http file.";
+            } catch (error) {
+                output.textContent = "Connection error:\n" + error;
+            }
+        });
+    </script>
+</body>
+</html>

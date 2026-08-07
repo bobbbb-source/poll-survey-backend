@@ -1,0 +1,93 @@
+@host = http://localhost:8080
+
+### Create Poll
+POST {{host}}/api/polls
+Content-Type: application/json
+
+{
+  "question": "What is your favourite programming language?",
+  "options": [
+    "C#",
+    "Java",
+    "Python",
+    "JavaScript"
+  ]
+}
+
+###
+
+### Get Poll
+GET {{host}}/api/polls/C4B3AE7B
+
+###
+
+### Vote
+POST {{host}}/api/polls/C483AE7B/vote
+Content-Type: application/json
+
+{
+  "optionId": 1,
+  "voterToken": "student001"
+}
+
+###
+
+### Results
+### Results
+GET {{host}}/api/polls/C483AE7B/results
+
+###
+
+### Close Poll
+POST {{host}}/api/polls/C483AE7B/close
+
+### Vote Again
+POST {{host}}/api/polls/C483AE7B/vote
+Content-Type: application/json
+
+{
+    "optionId": 2,
+    "voterToken": "student002"
+}
+
+### Create fresh poll for SignalR test
+
+POST {{host}}/api/polls
+Content-Type: application/json
+
+{
+  "question": "Which frontend framework do you prefer?",
+  "options": [
+    "Vue",
+    "React",
+    "Angular"
+  ]
+}
+
+
+### Get fresh poll
+
+GET {{host}}/api/polls/7177A8B1
+
+
+### SignalR live vote test
+
+POST {{host}}/api/polls/7177A8B1/vote
+Content-Type: application/json
+
+{
+  "optionId": 5,
+  "voterToken": "signalr-user-001"
+}
+
+### Create Docker test poll
+POST {{host}}/api/polls
+Content-Type: application/json
+
+{
+  "question": "Does Docker work?",
+  "options": [
+    "Yes",
+    "No"
+  ]
+}
