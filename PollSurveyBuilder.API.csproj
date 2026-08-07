@@ -32,4 +32,8 @@
     <Page Include="PollSurveyBuilder.API.http" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Compile Remove="PollSurveyBuilder.Tests\**\*.cs" />
+	</ItemGroup>
+
 </Project>

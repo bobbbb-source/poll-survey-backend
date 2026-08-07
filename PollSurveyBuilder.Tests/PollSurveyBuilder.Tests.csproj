@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PollSurveyBuilder.API\PollSurveyBuilder.API.csproj" />
+	  <ProjectReference Include="..\PollSurveyBuilder.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>
