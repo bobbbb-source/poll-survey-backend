@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../xUnit Test Project/PollSurveyBuilder.Tests.csproj" Id="dd1cf41b-236f-43b4-b2ce-73090e233225" />
   <Project Path="PollSurveyBuilder.API.csproj" />
 </Solution>

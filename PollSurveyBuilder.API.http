@@ -81,11 +81,25 @@ Content-Type: application/json
 }
 
 ### Create Docker test poll
+
 POST {{host}}/api/polls
 Content-Type: application/json
 
 {
   "question": "Does Docker work?",
+  "options": [
+    "Yes",
+    "No"
+  ]
+}
+
+###
+
+POST http://localhost:8080/api/polls
+Content-Type: application/json
+
+{
+  "question": "Docker final test",
   "options": [
     "Yes",
     "No"
