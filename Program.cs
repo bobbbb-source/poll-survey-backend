@@ -26,7 +26,8 @@ builder.Services.AddCors(options =>
                 "https://localhost:5173",
                 "http://localhost:3000",
                 "https://localhost:3000",
-                "https://localhost:51432"
+                "https://localhost:51432",
+                "https://poll-survey-frontend.vercel.app"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
