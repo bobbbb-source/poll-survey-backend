@@ -41,24 +41,31 @@ using (var scope = app.Services.CreateScope())
     var dbContext =
         scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-    var maxRetries = 10;
-    var retryDelay = TimeSpan.FromSeconds(5);
-
-    for (var attempt = 1; attempt <= maxRetries; attempt++)
+    if (app.Environment.IsEnvironment("Testing"))
     {
-        try
-        {
-            dbContext.Database.Migrate();
-            break;
-        }
-        catch (Exception) when (attempt < maxRetries)
-        {
-            Console.WriteLine(
-                $"Database not ready. Retrying migration " +
-                $"({attempt}/{maxRetries})..."
-            );
+        dbContext.Database.EnsureCreated();
+    }
+    else
+    {
+        var maxRetries = 10;
+        var retryDelay = TimeSpan.FromSeconds(5);
 
-            Thread.Sleep(retryDelay);
+        for (var attempt = 1; attempt <= maxRetries; attempt++)
+        {
+            try
+            {
+                dbContext.Database.Migrate();
+                break;
+            }
+            catch (Exception) when (attempt < maxRetries)
+            {
+                Console.WriteLine(
+                    $"Database not ready. Retrying migration " +
+                    $"{attempt}/{maxRetries}..."
+                );
+
+                Thread.Sleep(retryDelay);
+            }
         }
     }
 }
