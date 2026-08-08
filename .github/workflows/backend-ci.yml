@@ -31,6 +31,9 @@ jobs:
       - name: Build
         run: dotnet build PollSurveyBuilder.API.slnx --configuration Release --no-restore
 
+      - name: Static analysis
+        run: dotnet format PollSurveyBuilder.API.slnx --verify-no-changes
+
       - name: Run unit tests
         run: dotnet test PollSurveyBuilder.Tests/PollSurveyBuilder.Tests.csproj --configuration Release --no-build
 
