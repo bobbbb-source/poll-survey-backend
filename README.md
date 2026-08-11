@@ -1,6 +1,6 @@
 # Poll & Survey Builder
 
-A real-time Poll & Survey Builder developed for the AMD201 Advanced .NET Development group assignment. Live deployment verified.
+A real-time Poll & Survey Builder developed for the AMD201 Advanced .NET Development group assignment. Live deployment verified. real demo
 
 The application allows users to create multiple-choice polls, share a unique poll link, submit votes, view live results, and close polls. Results update in real time using SignalR.
 
